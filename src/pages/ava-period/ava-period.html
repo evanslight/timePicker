@@ -3,9 +3,9 @@
 <!-- <button ion-button menuToggle>Toggle Menu</button> -->
 
 <!-- <ion-nav id="nav" #content [root]="AddPeriodPage"></ion-nav> -->
-    <button ion-button clear menuToggle>
+<!--     <button ion-button clear menuToggle>
       <ion-icon name="menu" text-right></ion-icon>
-    </button>
+    </button> -->
 
   <ion-navbar hideBackButton="true">
     <button ion-button clear menuToggle>
@@ -19,12 +19,45 @@
 </ion-header>
 
 
-<ion-content padding id="page1" class="no-scroll">
+<ion-content padding id="page1" class="no-scroll" >
 
   <button id="avaPeriod-button5" ion-button color="balanced" block on-click="goToAddPeriod()">
     Add New Period
   </button>
-  <ion-card id="avaPeriod-card21">
+
+  <button id="avaPeriod-button5" ion-button color="balanced" block on-click="gettaskList()">
+   gettaskList
+  </button>
+
+  <form id="detail-form5">
+    <ion-list >
+<!--       <ion-item *ngFor="let item of items"> -->
+
+      <ion-item-sliding *ngFor="let item of items ">
+  <button id="avaPeriod-button5" ion-button color="balanced" block on-click="gettaskList()">
+   gettaskList
+  </button>      
+        <ion-item >
+<!--           <ion-label stacked>as</ion-label>
+          <ion-label stacked>City</ion-label> -->
+<!--           <button ion-button (click)="presentModal()">{{ item }}</button> -->
+          <ion-label float float-start> {{ "???" }}</ion-label>
+           
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button (click)="favorite(item)">Favorite</button>
+          <button ion-button color="danger" (click)="share(item)">Share</button>
+        </ion-item-options>
+    
+        <ion-item-options side="right">
+          <button ion-button (click)="unread(item)">Unread</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </form>
+
+
+<!--   <ion-card id="avaPeriod-card21">
     <ion-list>
       <ion-item color="none" id="avaPeriod-list-item7">
         <ion-avatar item-left>
@@ -56,7 +89,7 @@
         Play Song
       </ion-item>
     </ion-list>
-  </ion-card>
+  </ion-card> -->
 </ion-content>
 
 

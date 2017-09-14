@@ -4,15 +4,15 @@
     <ion-list id="login-list2">
       <ion-item id="login-input1">
         <ion-label></ion-label>
-        <ion-input type="email" placeholder="Email"></ion-input>
+        <ion-input [(ngModel)]="name1" [ngModelOptions]="{standalone: true}" type="email" placeholder="Email"></ion-input>
       </ion-item>
       <ion-item id="login-input2">
         <ion-label></ion-label>
-        <ion-input type="password" placeholder="Password"></ion-input>
+        <ion-input [(ngModel)]="password1" [ngModelOptions]="{standalone: true}" type="password" placeholder="Password"></ion-input>
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-    <button id="login-button1" ion-button color="balanced" block style="font-weight:600;" on-click="goToAvaPeriod()">
+    <button id="login-button1" ion-button color="balanced" block style="font-weight:600;" on-click="login(name1,password1)">
       Log in
     </button>
     <button id="login-button4" ion-button clear color="positive" block style="font-weight:300;color:#ECF0F1;font-size:12px;" on-click="goToResetPassword()">

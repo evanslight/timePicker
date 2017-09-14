@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-// import { AvaPeriodPage } from '../ava-period/ava-period';
-// import { AddPeriodPage } from '../add-period/add-period';
-// import { AvaPeriodPage } from '../ava-period/ava-period';
-// import { SignupPage } from '../signup/signup';
-// import { LoginPage } from '../login/login';
-// import { ResetPasswordPage } from '../reset-password/reset-password';
+
+import { StaffProvider } from '../../providers/staff/staff';
 
 @Component({
   selector: 'page-reset-password',
@@ -14,11 +10,17 @@ import { LoginPage } from '../login/login';
 })
 export class ResetPasswordPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private sp: StaffProvider) {
+
   }
   goToLogin(params){
     if (!params) params = {};
+
+    this.sp.resetPassword(params);
     this.navCtrl.push(LoginPage);
+  }
+  back(){
+    this.navCtrl.pop();
   }
   // goToAvaPeriod(params){
   //   if (!params) params = {};

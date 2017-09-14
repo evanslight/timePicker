@@ -13,6 +13,7 @@ export class AddPeriodPage {
   goToAvaPeriod(params){
     if (!params) params = {};
     this.navCtrl.push(AvaPeriodPage);
+    this.navCtrl.setRoot(AvaPeriodPage);
+    // this.navCtrl.push(AvaPeriodPage);
   }
-
 }
