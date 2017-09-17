@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AddPeriodPage } from '../add-period/add-period';
 import { LoginPage } from '../login/login';
-import { StaffProvider } from '../../providers/staff/staff';
+// import { StaffProvider } from '../../providers/staff/staff';
 
 @Component({
   selector: 'page-ava-period',
@@ -11,11 +11,16 @@ import { StaffProvider } from '../../providers/staff/staff';
 export class AvaPeriodPage {
   items: any;
   originalItems: any[];
-  taskList: any;
+  taskList: any[] = [];
+  item: any;
 
-
-  constructor(public navCtrl: NavController, private sp: StaffProvider) {
-    this.initializeItems()
+  constructor(public navCtrl: NavController,  public navParams: NavParams) {
+    // this.initializeItems()
+    // this.sp.initializeData()
+    // login.ts goToAvaPeriod set item
+    console.log('ava-period item ->', navParams.get('item'));
+    this.item=navParams.get('item');
+    this.getTasks();
     // for (let task in this.sp.retrieveTasklist()) {    
     //   console.log("AvaPeriodPage->>>"+task)
     // }
@@ -41,36 +46,47 @@ export class AvaPeriodPage {
   //   //   'Bogota',
   //   // ]
   // }
-
-
-
-  initializeItems() {
-    // this.sp.getAllUser().then((value) => {
-    //   console.log("->"+value);
-    // })
-
-  // this.items = this.sp.getAllUser;
-
-    this.sp.Send().subscribe( usernames => {
-        console.log("lalala");
-        console.log(usernames);
-
-        var temp = []
-        usernames.forEach(lalala => {
-           console.log(lalala.val());
-           temp.push(lalala.val())
-
-        })
-        // console.log("the temp is "+temp);
-        this.items = temp;
-        this.originalItems=this.items;
-  });
-
-    // this.items = [
-    //   'Amsterdam',
-    //   'Bogota',
-    // ]
+  getTasks() {
+    // console.log('ava-period name is ', this.item);
+    for (let task in this.item.tasks) {
+      // var tempDate = new Date(this.item.tasks[task].toDate);
+      // if (this.today <= tempDate) {
+      //   this.taskList.push(this.item.tasks[task]);
+      // }
+      this.taskList.push(this.item.tasks[task]);
+      console.log('ava-period task is ', this.item.tasks[task]);
+      console.log('ava-period taskid is ', task);
+    }
   }
+
+
+  // initializeItems() {
+  //   // this.sp.getAllUser().then((value) => {
+  //   //   console.log("->"+value);
+  //   // })
+
+  // // this.items = this.sp.getAllUser;
+
+  //   this.sp.Send().subscribe( usernames => {
+  //       console.log("lalala");
+  //       console.log(usernames);
+
+  //       var temp = []
+  //       usernames.forEach(lalala => {
+  //          console.log(lalala.val());
+  //          temp.push(lalala.val())
+
+  //       })
+  //       // console.log("the temp is "+temp);
+  //       this.items = temp;
+  //       this.originalItems=this.items;
+  // });
+
+  //   // this.items = [
+  //   //   'Amsterdam',
+  //   //   'Bogota',
+  //   // ]
+  // }
   goToAddPeriod(params){
     if (!params) params = {};
     this.navCtrl.push(AddPeriodPage);

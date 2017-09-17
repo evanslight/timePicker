@@ -43,7 +43,10 @@ export class MyApp {
 
   goToAvaPeriod(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(AvaPeriodPage);
+    this.sp.retrieveTasklist()
+    // console.log("staff userInfo app component->")
+    // console.log(this.sp.userInforStaff)
+    // this.navCtrl.setRoot(AvaPeriodPage,{item: this.sp.userInforStaff});
   }
 
   goToSignup(params){
@@ -53,7 +56,7 @@ export class MyApp {
 
   goToLogin(params){
     if (!params) params = {};
-    this.sp.readDestroy();
+    // this.sp.readDestroy();
     this.afAuth.auth.signOut();
     this.navCtrl.setRoot(LoginPage);
   }

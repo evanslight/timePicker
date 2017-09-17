@@ -20,21 +20,30 @@ export class LoginPage {
   user: Observable<firebase.User>;
   name1: any;
   password1: any;
+  item: any;
+  items: any;
+  currentTaskList: any;
 
-  constructor(public navCtrl: NavController, public afAuth: AngularFireAuth, public af: AngularFireDatabase, private sp: StaffProvider, public loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, 
+    public afAuth: AngularFireAuth, 
+    public af: AngularFireDatabase, 
+    private sp: StaffProvider, 
+    public loadingCtrl: LoadingController) {
+
     this.user = this.afAuth.authState;
     this.name1="howard@abacus.co";
     this.password1="123456";
+    // this.item=this.sp.retrieveTasklist();
   }
   // ngAfterViewInit(){
   //       this.LoginPage._setScrollDisabled(true);
   // }
 
   // setRoot(AvaPeriodPage) can make top left icon right
-  get goToAvaPeriod(): string{
+  goToAvaPeriod(){
     // if (!params) params = {};
-    this.navCtrl.setRoot(AvaPeriodPage);
-    return "";
+    // this.navCtrl.setRoot(AvaPeriodPage,{item: this.item});
+    this.navCtrl.setRoot(AvaPeriodPage,{item: this.currentTaskList});
     // this.navCtrl.push(AvaPeriodPage);
   }
 
@@ -48,10 +57,26 @@ export class LoginPage {
     this.sp.emailLogin(username, password)
     .then(aaa => {
       this.sp.authenticated; 
-      loading.dismiss();
-      if ( this.sp.authenticated == true ) {
-        this.goToAvaPeriod;
-      }
+      console.log("login->this.sp.whichUser "+this.sp.whichUser); 
+
+          const path = `users/${this.sp.whichUser}`;
+
+          firebase.database().ref(path).once('value').then((snapshot)=> {
+            console.log("login->snapshot "+snapshot.val().tasks); 
+            this.currentTaskList=snapshot.val();
+            loading.dismiss();
+            if ( this.sp.authenticated == true ) {
+              this.goToAvaPeriod();
+            }
+          })
+
+      // this.sp.retrieveTasklist(this.sp.currentUser);
+      // console.log("login->this.sp.userInfo "+this.sp.userInfo); 
+      // loading.dismiss();
+      // if ( this.sp.authenticated == true ) {
+      //   this.goToAvaPeriod(this.currentTaskList);
+      // }
+      
     })
     .catch((error) => {
       console.log("error "+error);   

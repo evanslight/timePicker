@@ -24,24 +24,62 @@
   <button id="avaPeriod-button5" ion-button color="balanced" block on-click="goToAddPeriod()">
     Add New Period
   </button>
+<!-- <ion-item>
+  <ion-icon name="logo-twitter" item-start></ion-icon>
+  Followers
+  <ion-badge item-end>260k</ion-badge>
+</ion-item> -->
 
-  <button id="avaPeriod-button5" ion-button color="balanced" block on-click="gettaskList()">
-   gettaskList
-  </button>
+<!--   <ion-item>
+    <ion-icon name="football" item-start large></ion-icon>
+    <h2>Museum of Football</h2>
+    <p>11 N. Way St, Madison, WI 53703</p>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="wine" item-left large ></ion-icon>
+    <h2>Institute of Fine Cocktails</h2>
+    <p>14 S. Hop Avenue, Madison, WI 53703</p>
+  </ion-item> -->
 
   <form id="detail-form5">
     <ion-list >
 <!--       <ion-item *ngFor="let item of items"> -->
 
-      <ion-item-sliding *ngFor="let item of items ">
-  <button id="avaPeriod-button5" ion-button color="balanced" block on-click="gettaskList()">
-   gettaskList
-  </button>      
+      <ion-item-sliding *ngFor="let task of taskList ">
+     
         <ion-item >
 <!--           <ion-label stacked>as</ion-label>
           <ion-label stacked>City</ion-label> -->
 <!--           <button ion-button (click)="presentModal()">{{ item }}</button> -->
-          <ion-label float float-start> {{ "???" }}</ion-label>
+
+<!--           <ion-label float float-start> {{ task.title }}  </ion-label> -->
+<!--           <ion-badge item-end>{{ task.fromDate }}</ion-badge>
+          <ion-badge item-end>{{ task.toDate }}</ion-badge> -->
+<!--             <ion-row>
+                <ion-col col-6 col-sm>
+                  <h2>{{ task.title }}</h2>
+                </ion-col>
+                <ion-col col-6 col-sm>
+                  <ion-badge item-end>{{ task.status }}</ion-badge>
+                </ion-col>
+            </ion-row> -->
+<h2>{{ task.title }}</h2>
+<ion-badge item-end>{{ task.status }}</ion-badge>
+<!--           <h3>{{ task.fromDate }}</h3>
+          <h3 text-right>{{ task.toDate }}</h3> -->
+  <ion-row>
+    <ion-col col-6 col-sm>
+      <h3>{{ task.fromDate }}</h3>
+    </ion-col>
+    <ion-col col-6 col-sm>
+      <h3 text-right>{{ task.toDate }}</h3>
+    </ion-col>
+  </ion-row>
+
+<!--   <ion-badge item-end>{ task.status }}</ion-badge> -->
+<!--     <p>I've had a pretty messed up day. If we just...</p> -->
+
            
         </ion-item>
         <ion-item-options side="left">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { ToastController } from 'ionic-angular';
+import { ToastController, App } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
@@ -9,7 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 
 // import { NavController } from 'ionic-angular';
 
-
+// import { LoginPage } from '../../pages/login/login';
 import { AvaPeriodPage } from '../../pages/ava-period/ava-period';
 // import { AddPeriodPage } from '../../pages/add-period/add-period';
 // import { SignupPage } from '../../pages/signup/signup';
@@ -27,8 +27,13 @@ import { AvaPeriodPage } from '../../pages/ava-period/ava-period';
 export class StaffProvider {
 
   user: Observable<firebase.User>;
-  items: FirebaseListObservable<any[]>;
+  items: FirebaseListObservable<any[]>;  
+  whichUser: any;
+
+
   userInfo: any;
+  userInforStaff: any;
+
   test: any;
   itemsSubscription: any;
 
@@ -43,7 +48,7 @@ export class StaffProvider {
 
   dict: any[];
 
-  constructor( private afAuth: AngularFireAuth,
+  constructor( private app: App, private afAuth: AngularFireAuth,
     private db: AngularFireDatabase, private toastCtrl: ToastController) {
 
     this.items = db.list('/users', {
@@ -185,14 +190,16 @@ export class StaffProvider {
       .then((user) => {
         this.authState = user
           const path = `users/${this.currentUserId}`;
+
           this.adaRef = firebase.database().ref(path);
           this.adaRef.once('value').then((snapshot)=> {
-            this.userInfo=snapshot.val()
+            // this.userInfo=snapshot.val()
             this.displayName=snapshot.val().name
+
             // this.test = snapshot.val().name
             // console.log(",", snapshot.val())
-            this.retrieveTasklist()
-            console.log(this.userInfo)
+            // this.retrieveTasklist()
+            // console.log(this.userInfo)
 
 
         });
@@ -201,7 +208,10 @@ export class StaffProvider {
         // this.adaRef.set({
         //   'name': 'ada'
         // });
-
+          this.whichUser = this.currentUserId;
+          // this.userInfo=this.retrieveTasklist(this.whichUser);
+          console.log("userid staff login ++" + this.whichUser);
+          // console.log("userInfo staff login ++" + this.userInfo);
         // console.log("->"+this.displayName)
       })
       .catch(error => {
@@ -218,17 +228,73 @@ export class StaffProvider {
   }
 
   //retrieve task for ava-period page
-  retrieveTasklist(): any{
-    var temp = []
-    if (this.userInfo.tasks != null ){
+  retrieveTasklist(){
 
-     for (let task in this.userInfo.tasks) {   
-      temp.push(this.userInfo.tasks[task])
-      console.log("retrieveTasklist->>>"+task)
-      }
-      console.log("retrieveTasklist  temp ->>>"+temp)
-      return temp     
-    }
+    // const path = `users/${userid}`;
+    
+    // this.adaRef = firebase.database().ref(path);
+    // this.adaRef.once('value').then((snapshot)=> {
+    //   // return this.userInfo  
+    //   this.userInfo=snapshot.val() 
+    //   console.log("userinfo is " + this.userInfo);
+    // })  
+  //   this.items.subscribe( userinfos => {
+
+  //       var temp = []
+  //       userinfos.forEach(userinfo => {
+          
+  //         if (userinfo.key == userid) {
+  //           this.userInfo = userinfo.val()
+  //           console.log("get user key id -> " +this.userInfo);
+  //           return this.userInfo
+
+  //         } else {
+  //           return ""
+  //         }
+  //         // if (userinfo.key == )
+  //         //  console.log(lalala.val());
+  //         //  temp.push(lalala.val())
+
+  //       })
+  //       // console.log("the temp is "+temp);
+  //       // this.items = temp;
+  //       // this.originalItems=this.items;
+  // });
+
+          // const path = `users/${this.whichUser}`;
+          // firebase.database().ref(path).once('value').then((snapshot)=> {
+          //   console.log("staff snapshot.val() "+snapshot.val());
+          //   });
+    const path = `/users/${this.whichUser}`;
+    console.log("staff path "+path);
+    this.userInfo = this.db.object(path, {
+      preserveSnapshot: true
+    });
+    console.log("staff userInfo ->"+this.userInfo);
+    this.userInfo.subscribe( userInfos => {
+    // userInfos.forEach(snapshot => {
+    //   console.log("staff userInfo ------->")
+    //   console.log(snapshot.key)
+    //   console.log(snapshot.val())
+    // });
+
+
+      this.userInforStaff = userInfos.val()
+      console.log("staff userInfo ------->")
+      console.log(this.userInforStaff);
+      // this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff});
+      this.app.getActiveNav().setRoot(AvaPeriodPage,{item: this.userInforStaff});
+
+      // return this.userInforStaff;
+
+    },      
+    // The 2nd callback handles errors.
+    (err) => console.error(err),
+    // The 3rd callback handles the "complete" event.
+    () => console.log("observable complete")
+    )
+    // .then(as => { this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff}) });
+
 
   }
   // Sends email allowing user to reset password
@@ -250,7 +316,7 @@ export class StaffProvider {
 
 
   //// Helpers ////
-  private   presentToast(errorMessage:string): void {
+  private presentToast(errorMessage:string): void {
     let toast = this.toastCtrl.create({
       message: errorMessage,
       duration: 3000,
@@ -303,7 +369,8 @@ export class StaffProvider {
         "fromDate": fromDate,
         "toDate": toDate,
         "startTime": startTime,
-        "endTime": endTime
+        "endTime": endTime,
+        "status": "pending"
     }
 
     this.adaRef.push(data)
