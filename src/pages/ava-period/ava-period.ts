@@ -128,4 +128,8 @@ export class AvaPeriodPage {
 
     }
   }
+
+  // edit(){
+  //   this.openPage();
+  // }
 }

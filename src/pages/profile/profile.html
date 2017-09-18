@@ -8,7 +8,125 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page3" class="no-scroll">
+<ion-content padding id="page3">
+
+  <ion-card id="addPeriod-card22">
+    <ion-list>
+      <ion-item color="none" id="addPeriod-list-item12">
+<!--         <ion-avatar item-left>
+          <img />
+        </ion-avatar> -->
+        <ion-icon name="contact" *ngIf="userInforStaff.role == 'admin'" item-left></ion-icon>
+        <ion-icon name="contacts" *ngIf="userInforStaff.role == 'staff'" item-left></ion-icon>
+        <h1 text-right>
+          {{ userInforStaff.name }}
+        </h1>
+        <h2 text-right>
+          {{ userInforStaff?.role }}
+        </h2>
+      </ion-item>
+
+      <ion-list>
+      
+        <ion-list-header>
+        <ion-icon name="mail" item-left></ion-icon>
+          Email
+        </ion-list-header>
+        <ion-item >
+      <ion-label  floating> {{ userInforStaff?.email }}</ion-label>
+              <ion-input [(ngModel)]="email" [ngModelOptions]="{standalone: true}"  minlength="5" maxlength="29"  type="email"></ion-input>
+        </ion-item>
+      <!--   <ion-item>The Empire Strikes Back</ion-item>
+        <ion-item>Blade Runner</ion-item> -->
+      </ion-list>
+
+      <div class="spacer" style="height:20px;" id="login-spacer1"></div>
+
+      <ion-list>
+        <ion-list-header>
+        <ion-icon name="call" item-left></ion-icon>
+          Mobile
+        </ion-list-header>
+        <ion-item>
+      <ion-label floating> {{ userInforStaff?.mobile }}</ion-label>
+              <ion-input [(ngModel)]="phone" [ngModelOptions]="{updateOn: 'blur'}" minlength="7" maxlength="11" type="tel"></ion-input>
+        </ion-item>
+      <!--   <ion-item>The Empire Strikes Back</ion-item>
+        <ion-item>Blade Runner</ion-item> -->
+      </ion-list>
+<!--       <ion-item>
+        <ion-label floating>Email: {{ userInforStaff?.email }}</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item> -->
+
+<!--       <ion-item>
+        <ion-label floating>Mobile: {{ userInforStaff?.mobile }}</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item> -->
+
+      <ion-item>
+       <ion-icon name="briefcase"> Assigned Task</ion-icon>
+        <ion-badge item-end>{{ length }}</ion-badge>
+<!--         <ion-label floating>Number of Task: {{ length }}</ion-label>
+        <ion-input type="text"></ion-input> -->
+      </ion-item>
+
+<!--       <ion-item>
+        <ion-label *ngIf="userInforStaff.mobile != null " floating>{{ userInforStaff.mobile }}</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label *ngIf="userInforStaff.mobile != null " floating>{{ userInforStaff.mobile }}</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item> -->
+
+
+<!--       <form id="addPeriod-form3">
+        <ion-item id="addPeriod-input7">
+          <ion-label>
+            Input
+          </ion-label>
+          <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+      </form>
+      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
+        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
+      </div>
+      <ion-item id="addPeriod-list-item-container4">
+        <div id="addPeriod-markdown4" class="show-list-numbers-and-dots">
+          <p style="margin-top:0px;color:#000000;">
+            Some friendly
+            <strong>
+              markdown
+            </strong>
+          </p>
+        </div>
+      </ion-item>
+      <form id="addPeriod-form7">
+        <ion-item id="addPeriod-input9">
+          <ion-label>
+            Input
+          </ion-label>
+          <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+      </form>
+      <ion-item color="assertive" id="addPeriod-list-item13">
+        <ion-icon name="calendar" item-left></ion-icon>
+        Play Song
+      </ion-item>
+      <ion-item color="assertive" id="addPeriod-list-item14">
+        <ion-icon name="clock" item-left></ion-icon>
+        Play Song
+      </ion-item>
+      <button id="addPeriod-button7" ion-button color="balanced" block on-click="goToAvaPeriod()">
+        Submit
+      </button> -->
+    </ion-list>
+  </ion-card>
+
+
+<!-- 
   <form id="profile-form5">
     <ion-item id="profile-select1">
       <ion-label>
@@ -36,8 +154,10 @@
         Item
       </h2>
     </ion-item>
-  </form>
-  <button id="profile-button9" ion-button color="balanced" block on-click="goToAvaPeriod()">
+  </form> -->
+  <button id="profile-button9" ion-button color="balanced" block on-click="update(email,phone)">
     Update
   </button>
+
+
 </ion-content>

@@ -65,7 +65,16 @@
                 </ion-col>
             </ion-row> -->
 <h2>{{ task.title }}</h2>
-<ion-badge item-end>{{ task.status }}</ion-badge>
+<ion-badge color="danger" *ngIf="task.status == 'rejected'" item-end>{{ task.status }}</ion-badge>
+<ion-badge color="secondary" *ngIf="task.status == 'approve'" item-end>{{ task.status }}</ion-badge>
+<ion-badge *ngIf="task.status == 'pending'" item-end>{{ task.status }}</ion-badge>
+
+<!--     <button id="login-button6" ion-button color="balanced"  style="color:#FAFAF5;" (click)="login(name1, password1)" *ngIf="!(user | async)?.uid" block>
+      Login
+    </button>
+    <button id="login-button7" ion-button color="danger" style="color:#FAFAF5;" (click)="logout()" *ngIf="(user | async)?.uid" block>
+      Logout
+    </button> -->
 <!--           <h3>{{ task.fromDate }}</h3>
           <h3 text-right>{{ task.toDate }}</h3> -->
   <ion-row>
@@ -88,7 +97,7 @@
         </ion-item-options>
     
         <ion-item-options side="right">
-          <button ion-button (click)="unread(item)">Unread</button>
+          <button ion-button (click)="edit(item)">Edit</button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>

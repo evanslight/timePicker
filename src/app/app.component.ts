@@ -38,12 +38,13 @@ export class MyApp {
 
   goToProfile(params){
     if (!params) params = {};
-    this.navCtrl.setRoot(ProfilePage);
+    // this.navCtrl.setRoot(ProfilePage);
+    this.sp.retrieveTasklist("profile")
   }
 
   goToAvaPeriod(params){
     if (!params) params = {};
-    this.sp.retrieveTasklist()
+    this.sp.retrieveTasklist("task")
     // console.log("staff userInfo app component->")
     // console.log(this.sp.userInforStaff)
     // this.navCtrl.setRoot(AvaPeriodPage,{item: this.sp.userInforStaff});

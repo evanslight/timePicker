@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 
 // import { LoginPage } from '../../pages/login/login';
 import { AvaPeriodPage } from '../../pages/ava-period/ava-period';
+import { ProfilePage } from '../../pages/profile/profile';
 // import { AddPeriodPage } from '../../pages/add-period/add-period';
 // import { SignupPage } from '../../pages/signup/signup';
 // import { ResetPasswordPage } from '../../pages/reset-password/reset-password';
@@ -228,7 +229,7 @@ export class StaffProvider {
   }
 
   //retrieve task for ava-period page
-  retrieveTasklist(){
+  retrieveTasklist(task: string){
 
     // const path = `users/${userid}`;
     
@@ -283,7 +284,14 @@ export class StaffProvider {
       console.log("staff userInfo ------->")
       console.log(this.userInforStaff);
       // this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff});
-      this.app.getActiveNav().setRoot(AvaPeriodPage,{item: this.userInforStaff});
+      if (task=="task") {
+        this.app.getActiveNav().setRoot(AvaPeriodPage,{item: this.userInforStaff});
+      } else if (task=="profile") {
+        this.app.getActiveNav().setRoot(ProfilePage,{item: this.userInforStaff, id: this.whichUser});
+      } else {
+        console.log("error in task and profile switch.")
+      }
+      
 
       // return this.userInforStaff;
 
@@ -334,12 +342,32 @@ export class StaffProvider {
       email: this.authState.email,
       name: this.displayName,
       mobile: this.mobile,
+      role: "staff",
       tasks: []
     }
 
     this.db.object(path).update(data)
       .catch(error => console.log(error));
 
+  }
+
+
+  public updateProfile(email,phone): void {
+    // Writes user name and email to realtime db
+    // useful if your app displays information about users or for admin features
+
+    const emailPath = `users/${this.currentUserId}/email`; // Endpoint on firebase
+    const mobilePath = `users/${this.currentUserId}/mobile`; 
+    // const data = {
+    //   email: email,
+    //   mobile: phone
+    // }
+
+    this.db.object(emailPath).update(email)
+      .catch(error => console.log(error));
+
+    this.db.object(mobilePath).update(phone)
+      .catch(error => console.log(error));
   }
 
   public updateUserTask(fromDate: string, toDate: string, startTime: string, endTime: string, taskTitle: string, location: string): void {
