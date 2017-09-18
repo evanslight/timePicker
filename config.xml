@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-calendar" spec="^4.6.0" />
+    <engine name="ios" spec="~4.4.0" />
 </widget>
