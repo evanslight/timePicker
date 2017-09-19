@@ -9,7 +9,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { AdminPagePage } from '../pages/admin-page/admin-page';
+// import { AdminPagePage } from '../pages/admin-page/admin-page';
+import { EditPeriodPage } from '../pages/edit-period/edit-period';
 import { StaffProvider } from '../providers/staff/staff';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,7 +39,7 @@ export const firebaseConfig = {
     LoginPage,
     SignupPage,
     ResetPasswordPage,
-    AdminPagePage
+    EditPeriodPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,7 @@ export const firebaseConfig = {
     LoginPage,
     SignupPage,
     ResetPasswordPage,
-    AdminPagePage
+    EditPeriodPage
   ],
   providers: [
     Calendar,

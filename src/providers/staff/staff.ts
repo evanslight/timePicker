@@ -10,7 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 // import { NavController } from 'ionic-angular';
 
 // import { LoginPage } from '../../pages/login/login';
-import { AvaPeriodPage } from '../../pages/ava-period/ava-period';
+// import { AvaPeriodPage } from '../../pages/ava-period/ava-period';
 import { ProfilePage } from '../../pages/profile/profile';
 // import { AddPeriodPage } from '../../pages/add-period/add-period';
 // import { SignupPage } from '../../pages/signup/signup';
@@ -42,7 +42,9 @@ export class StaffProvider {
   displayName: string = '';
 
   namelist: any[] = [];
+  periodList: any[] = [];
   loadedDetail=false;
+  taskList: any;
 
   authState: any = null;
   mobile: string ='';
@@ -52,17 +54,28 @@ export class StaffProvider {
   constructor( private app: App, private afAuth: AngularFireAuth,
     private db: AngularFireDatabase, private toastCtrl: ToastController) {
 
-    this.items = db.list('/users', {
-      query: {
-        limitToLast: 50
-      },
-      preserveSnapshot: true
-    });
+    // this.items = db.list('/users', {
+    //   query: {
+    //     limitToLast: 50
+    //   },
+    //   preserveSnapshot: true
+    // });
 
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
     });
    
+  }
+
+  //signout does not work well
+  signout () {
+    this.afAuth.auth.signOut();
+  }
+
+  removeTask(taskKey) {
+    const path = `/users/${this.whichUser}/tasks`;
+    this.taskList = this.db.list(path);
+    this.taskList.remove(taskKey).then(_ => console.log('period deleted!'+taskKey));
   }
 
   // Returns true if user is logged in
@@ -128,41 +141,52 @@ export class StaffProvider {
     return ""
   }
 
-  Send() {
-    return this.items
-  }
+  //retrieve profile for profile page
+  retrieve(): any{
 
-  //// Email/Password Auth ////
-  initializeData(): any {
-    var temp = []
-    this.itemsSubscription=this.items.subscribe( usernames => {
-      const path = `users/${this.currentUserId}`;
-      this.adaRef = firebase.database().ref(path);
-      this.adaRef.once('value').then((snapshot)=> {
-          temp=snapshot.val()
-      })
-    // console.log("lalala");
-    // console.log(usernames);
+    const path = `/users/${this.whichUser}`;
+    console.log("staff path "+path);
+    this.userInfo = this.db.object(path, {
+      preserveSnapshot: true
+    });
+    console.log("staff userInfo ->"+this.userInfo);
+    return this.userInfo;
+  }
+  // Send() {
+  //   return this.items
+  // }
+
+  // //// Email/Password Auth ////
+  // initializeData(): any {
+  //   var temp = []
+  //   this.itemsSubscription=this.items.subscribe( usernames => {
+  //     const path = `users/${this.currentUserId}`;
+  //     this.adaRef = firebase.database().ref(path);
+  //     this.adaRef.once('value').then((snapshot)=> {
+  //         temp=snapshot.val()
+  //     })
+  //   // console.log("lalala");
+  //   // console.log(usernames);
 
     
-    // usernames.forEach(lalala => {
-    //    // console.log(lalala.val());
-    //    temp.push(lalala.val())
+  //   // usernames.forEach(lalala => {
+  //   //    // console.log(lalala.val());
+  //   //    temp.push(lalala.val())
 
-    // })
-    // console.log("the temp is "+temp);
-    return temp;
-  });
-  }
+  //   // })
+  //   // console.log("the temp is "+temp);
+  //   return temp;
+  // });
+  // }
 
     // this.items = [
     //   'Amsterdam',
     //   'Bogota',
     // ]
   // disconnect from subscribe
-  readDestroy(){
-    this.itemsSubscription.unsubscribe();
-  }
+  // readDestroy(){
+  //   this.itemsSubscription.unsubscribe();
+  // }
 
 
   // sign up through email
@@ -229,82 +253,102 @@ export class StaffProvider {
   }
 
   //retrieve task for ava-period page
-  retrieveTasklist(task: string){
+  // retrieveTasklist(task: string){
 
-    // const path = `users/${userid}`;
+  //   // const path = `users/${userid}`;
     
-    // this.adaRef = firebase.database().ref(path);
-    // this.adaRef.once('value').then((snapshot)=> {
-    //   // return this.userInfo  
-    //   this.userInfo=snapshot.val() 
-    //   console.log("userinfo is " + this.userInfo);
-    // })  
-  //   this.items.subscribe( userinfos => {
+  //   // this.adaRef = firebase.database().ref(path);
+  //   // this.adaRef.once('value').then((snapshot)=> {
+  //   //   // return this.userInfo  
+  //   //   this.userInfo=snapshot.val() 
+  //   //   console.log("userinfo is " + this.userInfo);
+  //   // })  
+  // //   this.items.subscribe( userinfos => {
 
-  //       var temp = []
-  //       userinfos.forEach(userinfo => {
+  // //       var temp = []
+  // //       userinfos.forEach(userinfo => {
           
-  //         if (userinfo.key == userid) {
-  //           this.userInfo = userinfo.val()
-  //           console.log("get user key id -> " +this.userInfo);
-  //           return this.userInfo
+  // //         if (userinfo.key == userid) {
+  // //           this.userInfo = userinfo.val()
+  // //           console.log("get user key id -> " +this.userInfo);
+  // //           return this.userInfo
 
-  //         } else {
-  //           return ""
-  //         }
-  //         // if (userinfo.key == )
-  //         //  console.log(lalala.val());
-  //         //  temp.push(lalala.val())
+  // //         } else {
+  // //           return ""
+  // //         }
+  // //         // if (userinfo.key == )
+  // //         //  console.log(lalala.val());
+  // //         //  temp.push(lalala.val())
 
-  //       })
-  //       // console.log("the temp is "+temp);
-  //       // this.items = temp;
-  //       // this.originalItems=this.items;
-  // });
+  // //       })
+  // //       // console.log("the temp is "+temp);
+  // //       // this.items = temp;
+  // //       // this.originalItems=this.items;
+  // // });
 
-          // const path = `users/${this.whichUser}`;
-          // firebase.database().ref(path).once('value').then((snapshot)=> {
-          //   console.log("staff snapshot.val() "+snapshot.val());
-          //   });
-    const path = `/users/${this.whichUser}`;
-    console.log("staff path "+path);
-    this.userInfo = this.db.object(path, {
-      preserveSnapshot: true
-    });
-    console.log("staff userInfo ->"+this.userInfo);
-    this.userInfo.subscribe( userInfos => {
-    // userInfos.forEach(snapshot => {
-    //   console.log("staff userInfo ------->")
-    //   console.log(snapshot.key)
-    //   console.log(snapshot.val())
-    // });
+  //         // const path = `users/${this.whichUser}`;
+  //         // firebase.database().ref(path).once('value').then((snapshot)=> {
+  //         //   console.log("staff snapshot.val() "+snapshot.val());
+  //         //   });
+  //   const path = `/users/${this.whichUser}`;
+  //   console.log("staff path "+path);
+  //   this.userInfo = this.db.object(path, {
+  //     preserveSnapshot: true
+  //   });
+  //   console.log("staff userInfo ->"+this.userInfo);
+  //   this.userInfo.subscribe( userInfos => {
+  //   // userInfos.forEach(snapshot => {
+  //   //   console.log("staff userInfo ------->")
+  //   //   console.log(snapshot.key)
+  //   //   console.log(snapshot.val())
+  //   // });
 
 
-      this.userInforStaff = userInfos.val()
-      console.log("staff userInfo ------->")
-      console.log(this.userInforStaff);
-      // this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff});
-      if (task=="task") {
-        this.app.getActiveNav().setRoot(AvaPeriodPage,{item: this.userInforStaff});
-      } else if (task=="profile") {
-        this.app.getActiveNav().setRoot(ProfilePage,{item: this.userInforStaff, id: this.whichUser});
-      } else {
-        console.log("error in task and profile switch.")
-      }
+  //     this.userInforStaff = userInfos.val()
+  //     console.log("staff userInfo ------->")
+  //     console.log(this.userInforStaff);
+  //     // this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff});
+  //     if (task=="task") {
+  //       this.app.getActiveNav().setRoot(AvaPeriodPage,{item: this.userInforStaff});
+  //     } 
+  //     // else if (task=="profile") {
+  //     //   this.app.getActiveNav().setRoot(ProfilePage,{item: this.userInforStaff, id: this.whichUser});
+  //     // } else {
+  //     //   console.log("error in task and profile switch.")
+  //     // }
       
 
-      // return this.userInforStaff;
+  //     // return this.userInforStaff;
 
-    },      
-    // The 2nd callback handles errors.
-    (err) => console.error(err),
-    // The 3rd callback handles the "complete" event.
-    () => console.log("observable complete")
-    )
-    // .then(as => { this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff}) });
+  //   },      
+  //   // The 2nd callback handles errors.
+  //   (err) => console.error(err),
+  //   // The 3rd callback handles the "complete" event.
+  //   () => console.log("observable complete")
+  //   )
+  //   // .then(as => { this.navCtrl.setRoot(AvaPeriodPage,{item: this.userInforStaff}) });
 
 
+  // }
+
+
+
+  public updateProfile(email,phone): void {
+    // Writes user name and email to realtime db
+    // useful if your app displays information about users or for admin features
+
+    const emailPath = `users/${this.whichUser}/email`; // Endpoint on firebase
+    const mobilePath = `users/${this.whichUser}/mobile`; 
+
+    this.db.object(emailPath).set(email)
+      .catch(error => console.log(error));
+    
+      
+    this.db.object(mobilePath).set(phone)
+      .catch(error => console.log(error));
   }
+
+
   // Sends email allowing user to reset password
   resetPassword(email: string) {
     const fbAuth = firebase.auth();
@@ -324,7 +368,7 @@ export class StaffProvider {
 
 
   //// Helpers ////
-  private presentToast(errorMessage:string): void {
+  public presentToast(errorMessage:string): void {
     let toast = this.toastCtrl.create({
       message: errorMessage,
       duration: 3000,
@@ -352,48 +396,14 @@ export class StaffProvider {
   }
 
 
-  public updateProfile(email,phone): void {
+  public updateUserTask(fromDate: string, toDate: string, startTime: string, endTime: string): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-
-    const emailPath = `users/${this.currentUserId}/email`; // Endpoint on firebase
-    const mobilePath = `users/${this.currentUserId}/mobile`; 
-    // const data = {
-    //   email: email,
-    //   mobile: phone
-    // }
-
-    this.db.object(emailPath).update(email)
-      .catch(error => console.log(error));
-
-    this.db.object(mobilePath).update(phone)
-      .catch(error => console.log(error));
-  }
-
-  public updateUserTask(fromDate: string, toDate: string, startTime: string, endTime: string, taskTitle: string, location: string): void {
-    // Writes user name and email to realtime db
-    // useful if your app displays information about users or for admin features
-
-    // const path = `users/${this.currentUserId}`; // Endpoint on firebase
-    // const data = {
-    //   email: this.authState.email,
-    //   name: this.displayName,
-    //   tasks: [{
-    //     "title": taskTitle,
-    //     "fromDate": fromDate,
-    //     "toDate": toDate,
-    //     "startTime": startTime,
-    //     "endTime": endTime
-    //   }]
-
-    // }
 
     const path = `users/${this.currentUserId}/tasks`; // Endpoint on firebase
     this.adaRef = firebase.database().ref(path);
 
     const data = {
-        "title": taskTitle,
-        "location": location,
         "fromDate": fromDate,
         "toDate": toDate,
         "startTime": startTime,
@@ -403,30 +413,33 @@ export class StaffProvider {
 
     this.adaRef.push(data)
 
-    // this.db.object(path).update(data)
-    //   .catch(error => console.log(error));
-
   }
 
-  // goToAvaPeriod(params){
-  //   if (!params) params = {};
-  //   this.navCtrl.setRoot(AvaPeriodPage);
-  //   // this.navCtrl.push(AvaPeriodPage);
-  // }
+  public editPeriod(fromDate: string, toDate: string, startTime: string, endTime: string, taskID: string): void {
+    // Writes user name and email to realtime db
+    // useful if your app displays information about users or for admin features
 
-// getAllUser():Observable<any> {
-//       return new Observable(observer => {
-//            firebase.database().ref('users')
-//            .limitToLast(10)
-//            .once('value',
-//                 (snapshot) => {
-//                      observer.next(snapshot.val().name);
-//                 },
-//                 (err) => {
-//                      console.log(err);
-//                 }
-//            );
-//       });
-//  }
+    const fromDatePath = `users/${this.currentUserId}/tasks/${taskID}/fromDate`; // Endpoint on firebase
+    const toDatePath = `users/${this.currentUserId}/tasks/${taskID}/toDate`; 
+    const startTimePath = `users/${this.currentUserId}/tasks/${taskID}/startTime`; 
+    const endTimePath = `users/${this.currentUserId}/tasks/${taskID}/endTime`; 
+    console.log("debug edit -> ")
+    console.log(fromDate)
+    console.log(toDate)
+
+    this.db.object(fromDatePath).set(fromDate)
+      .catch(error => console.log(error));
+    
+    this.db.object(toDatePath).set(toDate)
+      .catch(error => console.log(error));
+
+    this.db.object(startTimePath).set(startTime)
+      .catch(error => console.log(error));
+
+    this.db.object(endTimePath).set(endTime)
+      .catch(error => console.log(error));
+
+
+  }
 
 }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle right>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
@@ -62,14 +62,14 @@
     </ion-list>
   </ion-card> -->
 
-  <ion-list>
+<!--   <ion-list>
     <ion-item>
       <ion-input placeholder="Task Name" [(ngModel)]="taskName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input placeholder="Location" [(ngModel)]="location"></ion-input>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
   <ion-list>
     <ion-item>
@@ -109,7 +109,7 @@
 <!--     <button id="calendar-button7" ion-button color="positive" (click)="submitdata(startday, endday, event.timeStarts, event.timeEnd, taskName, location)" block>
       Confirm
     </button> -->
-    <button id="calendar-button7" ion-button color="positive" (click)="presentConfirm(startday, endday, event.timeStarts, event.timeEnd, taskName, location)" block>
+    <button id="calendar-button7" ion-button color="positive" (click)="presentConfirm(startday, endday, event.timeStarts, event.timeEnd)" block>
       Confirm
     </button>
 

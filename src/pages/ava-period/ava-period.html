@@ -8,7 +8,7 @@
     </button> -->
 
   <ion-navbar hideBackButton="true">
-    <button ion-button clear menuToggle>
+    <button ion-button clear menuToggle right>
       <ion-icon name="menu" text-left></ion-icon>
     </button>
     <ion-title>
@@ -45,29 +45,28 @@
   <form id="detail-form5">
     <ion-list >
 <!--       <ion-item *ngFor="let item of items"> -->
+      <ion-list-header>
+        {{userInfor?.name}}'s Periods      
+        <ion-badge color="secondary" item-end>{{ approve }}</ion-badge>
+        <ion-badge item-end>{{ pending }}</ion-badge>
+        <ion-badge color="danger" item-end>{{ rejected }}</ion-badge>
+      </ion-list-header>
 
       <ion-item-sliding *ngFor="let task of taskList ">
      
         <ion-item >
-<!--           <ion-label stacked>as</ion-label>
-          <ion-label stacked>City</ion-label> -->
-<!--           <button ion-button (click)="presentModal()">{{ item }}</button> -->
+          <ion-row>
+            <ion-col col-6 col-sm>
+              <h3>{{ task.value.fromDate }}</h3>
+            </ion-col>
+            <ion-col col-6 col-sm>
+              <h3 text-right>{{ task.value.toDate }}</h3>
+            </ion-col>
+          </ion-row>
 
-<!--           <ion-label float float-start> {{ task.title }}  </ion-label> -->
-<!--           <ion-badge item-end>{{ task.fromDate }}</ion-badge>
-          <ion-badge item-end>{{ task.toDate }}</ion-badge> -->
-<!--             <ion-row>
-                <ion-col col-6 col-sm>
-                  <h2>{{ task.title }}</h2>
-                </ion-col>
-                <ion-col col-6 col-sm>
-                  <ion-badge item-end>{{ task.status }}</ion-badge>
-                </ion-col>
-            </ion-row> -->
-<h2>{{ task.title }}</h2>
-<ion-badge color="danger" *ngIf="task.status == 'rejected'" item-end>{{ task.status }}</ion-badge>
-<ion-badge color="secondary" *ngIf="task.status == 'approve'" item-end>{{ task.status }}</ion-badge>
-<ion-badge *ngIf="task.status == 'pending'" item-end>{{ task.status }}</ion-badge>
+        <ion-badge color="danger" *ngIf="task.value.status == 'rejected'" item-end>{{ task.value.status }}</ion-badge>
+        <ion-badge color="secondary" *ngIf="task.value.status == 'approve'" item-end>{{ task.value.status }}</ion-badge>
+        <ion-badge *ngIf="task.value.status == 'pending'" item-end>{{ task.value.status }}</ion-badge>
 
 <!--     <button id="login-button6" ion-button color="balanced"  style="color:#FAFAF5;" (click)="login(name1, password1)" *ngIf="!(user | async)?.uid" block>
       Login
@@ -75,16 +74,19 @@
     <button id="login-button7" ion-button color="danger" style="color:#FAFAF5;" (click)="logout()" *ngIf="(user | async)?.uid" block>
       Logout
     </button> -->
-<!--           <h3>{{ task.fromDate }}</h3>
-          <h3 text-right>{{ task.toDate }}</h3> -->
-  <ion-row>
-    <ion-col col-6 col-sm>
-      <h3>{{ task.fromDate }}</h3>
-    </ion-col>
-    <ion-col col-6 col-sm>
-      <h3 text-right>{{ task.toDate }}</h3>
-    </ion-col>
-  </ion-row>
+<!--           <h3>{{ task.value.fromDate }}</h3>
+          <h3 text-right>{{ task.value.toDate }}</h3> -->
+          <ion-row>
+            <ion-col col-4 col-sm>
+              <h3>{{ task.value.startTime }}</h3>
+            </ion-col>
+            <ion-col col-4 col-sm text-center>
+               <ion-icon name="arrow-round-forward" ></ion-icon>
+            </ion-col>
+            <ion-col col-4 col-sm text-right>
+              <h3 text-right>{{ task.value.endTime }}</h3>
+            </ion-col>
+          </ion-row>
 
 <!--   <ion-badge item-end>{ task.status }}</ion-badge> -->
 <!--     <p>I've had a pretty messed up day. If we just...</p> -->
@@ -92,74 +94,15 @@
            
         </ion-item>
         <ion-item-options side="left">
-          <button ion-button (click)="favorite(item)">Favorite</button>
-          <button ion-button color="danger" (click)="share(item)">Share</button>
+<!--           <button ion-button (click)="favorite(item)">Favorite</button> -->
+          <button ion-button color="danger" (click)="delete(task.key,task.value.status)">Delete</button>
         </ion-item-options>
     
         <ion-item-options side="right">
-          <button ion-button (click)="edit(item)">Edit</button>
+          <button ion-button (click)="edit(task.key,task.value)">Edit</button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
   </form>
 
-
-<!--   <ion-card id="avaPeriod-card21">
-    <ion-list>
-      <ion-item color="none" id="avaPeriod-list-item7">
-        <ion-avatar item-left>
-          <img />
-        </ion-avatar>
-        <h2>
-          Item
-        </h2>
-      </ion-item>
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
-      <ion-item id="avaPeriod-list-item-container2">
-        <div id="avaPeriod-markdown2" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            Some friendly
-            <strong>
-              markdown
-            </strong>
-          </p>
-        </div>
-      </ion-item>
-      <ion-item color="assertive" id="avaPeriod-list-item8">
-        <ion-icon name="calendar" item-left></ion-icon>
-        Play Song
-      </ion-item>
-      <ion-item color="assertive" id="avaPeriod-list-item9">
-        <ion-icon name="clock" item-left></ion-icon>
-        Play Song
-      </ion-item>
-    </ion-list>
-  </ion-card> -->
 </ion-content>
-
-
-<!-- <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <button ion-item (click)="openPage(AddPeriodPage)">
-        Home
-      </button>
-      <button ion-item (click)="openPage(AddPeriodPage)">
-        Friends
-      </button>
-      <button ion-item (click)="openPage(AddPeriodPage)">
-        Events
-      </button>
-      <button ion-item (click)="openPage(AddPeriodPage)">
-        Close Menu
-      </button>
-    </ion-list>
-  </ion-content>
-</ion-menu> -->

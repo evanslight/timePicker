@@ -60,7 +60,8 @@ export class AddPeriodPage {
     timeStarts: '09:00',
     timeEnd: '17:00',
   }
-  submitdata(start, end, timebegin, timeend, taskName, location){
+
+  submitdata(start, end, timebegin, timeend){
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
@@ -68,13 +69,13 @@ export class AddPeriodPage {
     timebegin=this.event.timeStarts;
     timeend=this.event.timeEnd;
     console.log(start +" "+ end +" "+timebegin + " "+timeend);
-    this.sp.updateUserTask(start, end, timebegin, timeend, taskName, location);
+    this.sp.updateUserTask(start, end, timebegin, timeend);
     loading.dismiss();
   }
 
-  presentConfirm(startday, endday, timebegin, timeend, taskName, location) {
+  presentConfirm(startday, endday, timebegin, timeend) {
     let alert = this.alertCtrl.create({
-      title: 'Confirm purchase',
+      title: 'Confirm Period',
       message: 'Do you want to submit this period?',
       buttons: [
         {
@@ -87,10 +88,11 @@ export class AddPeriodPage {
         {
           text: 'Submit',
           handler: () => {
-            this.submitdata(startday, endday, timebegin, timeend, taskName, location)
+            this.submitdata(startday, endday, timebegin, timeend)
             console.log('submited');
             this.navCtrl.pop();
-            this.sp.retrieveTasklist("task");
+            this.navCtrl.setRoot(AvaPeriodPage); 
+            // this.sp.retrieveTasklist("task");
           }
         }
       ]

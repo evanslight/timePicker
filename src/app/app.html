@@ -1,6 +1,6 @@
-<ion-menu [content]="mainContent">
+<ion-menu [content]="mainContent" persistent="true" side="right">
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar >
       <ion-title>
         Menu
       </ion-title>
@@ -16,10 +16,10 @@
         <ion-icon name="person" item-left></ion-icon>
         Profile
       </ion-item>
-      <ion-item color="positive" menuClose="" on-click="goToAdminPage()" id="menu-list-item33">
+<!--       <ion-item color="positive" menuClose="" on-click="goToAdminPage()" id="menu-list-item33">
         <ion-icon name="information-circle" item-left></ion-icon>
         Admin
-      </ion-item>
+      </ion-item> -->
       <ion-item color="assertive" menuClose="" on-click="goToLogin()" id="menu-list-item4">
         <ion-icon name="log-out" item-left></ion-icon>
         Signout
