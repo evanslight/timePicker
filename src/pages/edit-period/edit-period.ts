@@ -51,7 +51,6 @@ export class EditPeriodPage {
 	let newToDate=moment(toDate).format('YYYY-MM-DD');
 	console.log(taskID);
 	this.sp.editPeriod(newfromDate, newToDate, startTime, endTime, taskID)
-  	this.navCtrl.pop();
   	this.navCtrl.setRoot(AvaPeriodPage); 
   }
 

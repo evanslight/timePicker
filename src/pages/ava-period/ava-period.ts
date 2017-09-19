@@ -131,7 +131,8 @@ export class AvaPeriodPage {
     // this.openPage(AddPeriodPage);
     if (period.status == "pending") {
       console.log("ava-period taskKey is "+taskKey)
-      this.presentProfileModal(taskKey,period);
+      this.navCtrl.push(EditPeriodPage, { taskKey: taskKey, period: period });  
+      // this.presentProfileModal(taskKey,period);
     } else {
       this.sp.presentToast("You can only modify pending period")
     }
@@ -148,10 +149,10 @@ export class AvaPeriodPage {
 
   }
 
-  private presentProfileModal(taskKey,period) {
-    let profileModal = this.modalCtrl.create(EditPeriodPage, { taskKey: taskKey, period: period });
-    profileModal.present();
-  }
+  // private presentProfileModal(taskKey,period) {
+  //   let profileModal = this.modalCtrl.create(EditPeriodPage, { taskKey: taskKey, period: period });
+  //   profileModal.present();
+  // }
 
 }
 
