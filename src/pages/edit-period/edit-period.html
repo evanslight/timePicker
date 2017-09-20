@@ -37,7 +37,7 @@
 
     <ion-item>
       <ion-label>Start Time</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="startTime"></ion-datetime>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="startTime" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" ></ion-datetime>
     </ion-item>
   </ion-list>
      <div class="spacer" style="height:10px;" id="login-spacer1"></div>
@@ -58,7 +58,7 @@
 
     <ion-item>
       <ion-label>End Time</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="endTime"></ion-datetime>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="endTime" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55" ></ion-datetime>
     </ion-item>
 
   </ion-list>
