@@ -39,7 +39,8 @@ export class MyApp {
     if (!params) params = {};
     // this.navCtrl.setRoot(ProfilePage);
     // this.sp.retrieveProfile();
-    this.navCtrl.push(ProfilePage);
+    // this.navCtrl.push(ProfilePage);
+    this.navCtrl.setRoot(ProfilePage);
   }
 
   goToAvaPeriod(params){

@@ -42,7 +42,7 @@
     <div class="spacer" style="height:10px;" id="login-spacer1"></div>
 
   <ion-list>
-    <ion-item (click)="setDate('end')">
+    <ion-item tappable (click)="setDate('end')">
 <!--       <ion-label>End Date</ion-label>
       <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="endday"></ion-datetime> -->
       <ion-row>
@@ -75,7 +75,7 @@
     </button> -->
   </ion-list>
 
-  <ion-fab right bottom>
+<!--   <ion-fab right bottom>
     <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
     <ion-fab-list side="left">
       <button (click)="jumpPage()" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
@@ -83,7 +83,7 @@
       <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
       <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab> -->
 <!-- <ion-calendar [(ngModel)]="date"
               [options]="optionsRange"
               [format]="'YYYY-MM-DD'">

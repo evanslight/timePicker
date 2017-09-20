@@ -114,8 +114,8 @@ export class AddPeriodPage {
 
   presentConfirm(startday, endday, timebegin, timeend) {
     let alert = this.alertCtrl.create({
-      title: 'Confirm Period',
-      message: 'Do you want to submit this period?',
+      title: 'Confirm',
+      message: 'Do you want to submit?',
       buttons: [
         {
           text: 'Cancel',
