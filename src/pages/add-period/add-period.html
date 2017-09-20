@@ -9,77 +9,16 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page2" >
-<!--   <ion-card id="addPeriod-card22">
-    <ion-list>
-      <ion-item color="none" id="addPeriod-list-item12">
-        <ion-avatar item-left>
-          <img />
-        </ion-avatar>
-        <h2>
-          Item
-        </h2>
-      </ion-item>
-      <form id="addPeriod-form3">
-        <ion-item id="addPeriod-input7">
-          <ion-label>
-            Input
-          </ion-label>
-          <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
-      </form>
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
-      <ion-item id="addPeriod-list-item-container4">
-        <div id="addPeriod-markdown4" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
-            Some friendly
-            <strong>
-              markdown
-            </strong>
-          </p>
-        </div>
-      </ion-item>
-      <form id="addPeriod-form7">
-        <ion-item id="addPeriod-input9">
-          <ion-label>
-            Input
-          </ion-label>
-          <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
-      </form>
-      <ion-item color="assertive" id="addPeriod-list-item13">
-        <ion-icon name="calendar" item-left></ion-icon>
-        Play Song
-      </ion-item>
-      <ion-item color="assertive" id="addPeriod-list-item14">
-        <ion-icon name="clock" item-left></ion-icon>
-        Play Song
-      </ion-item>
-      <button id="addPeriod-button7" ion-button color="balanced" block on-click="goToAvaPeriod()">
-        Submit
-      </button>
-    </ion-list>
-  </ion-card> -->
-
-<!--   <ion-list>
-    <ion-item>
-      <ion-input placeholder="Task Name" [(ngModel)]="taskName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input placeholder="Location" [(ngModel)]="location"></ion-input>
-    </ion-item>
-  </ion-list> -->
 
   <ion-list>
     <ion-item tappable (click)="setDate('start')">
 
       <ion-row>
 <!--         <ion-icon col-1 col-sm name="heart"></ion-icon>  -->
-        <ion-col col-7 col-sm>
+        <ion-col col-6 col-sm>
           <h2>Start Date</h2>
         </ion-col>
-        <ion-col col-4 col-sm>
+        <ion-col col-6 col-sm>
           <h2 text-right> {{ startday }}</h2>
         </ion-col>
       </ion-row>
@@ -95,7 +34,7 @@
 <!--       <ion-icon name="heart"></ion-icon>  -->
       <ion-label >
 <!--       <ion-icon col-1 col-sm name="heart"></ion-icon>  -->
-         sStart Time</ion-label>
+         Start Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
     </ion-item>
   </ion-list>
@@ -116,23 +55,11 @@
       </ion-row>
     </ion-item>
 
-
-
     <ion-item>
       <ion-label>End Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeEnd" minuteValues="00,05,10,15,20,25,30,35,40,45,50,55"></ion-datetime>
     </ion-item>
 
-
-<!--     <button ion-item>
-      <ion-label>Repeat</ion-label>
-      <ion-note item-end>Never</ion-note>
-    </button>
-
-    <button ion-item>
-      <ion-label>Travel Time</ion-label>
-      <ion-note item-end>None</ion-note>
-    </button> -->
   </ion-list>
 
   <ion-list>
@@ -147,6 +74,16 @@
       Check
     </button> -->
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button (click)="jumpPage()" ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 <!-- <ion-calendar [(ngModel)]="date"
               [options]="optionsRange"
               [format]="'YYYY-MM-DD'">

@@ -67,7 +67,7 @@ export class AddPeriodPage {
     timeStarts: '09:00',
     timeEnd: '17:00',
   }
-  
+
   // set date for start and end
   setDate(when) {
     const options = {
@@ -138,7 +138,11 @@ export class AddPeriodPage {
     });
     alert.present();
   }
-
+  
+  jumpPage(){
+    this.navCtrl.pop();
+    this.navCtrl.setRoot(AvaPeriodPage); 
+  }
 
   ionViewDidLoad(thisday) {
     thisday=this.startday;
