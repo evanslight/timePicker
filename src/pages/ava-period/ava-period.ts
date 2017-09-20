@@ -3,7 +3,7 @@ import { NavController,ModalController } from 'ionic-angular';
 
 import { AddPeriodPage } from '../add-period/add-period';
 import { EditPeriodPage } from '../edit-period/edit-period';
-import { LoginPage } from '../login/login';
+// import { LoginPage } from '../login/login';
 import { StaffProvider } from '../../providers/staff/staff';
 // import { StaffProvider } from '../../providers/staff/staff';
 
@@ -43,23 +43,30 @@ export class AvaPeriodPage {
       // console.log(this.userInfor);
       // push into task list to iterate in web
       // this.length=Object.keys(this.userInfor.tasks).length;
-
+      this.approve=0;
+      this.rejected=0;
+      this.pending=0;
+      this.taskList=[];
       for (let taskID in this.userInfor.tasks) {
-        if( this.userInfor.tasks[taskID].status == 'rejected') {
-          this.rejected += 1
-
-        } else if (this.userInfor.tasks[taskID].status == 'approve') {
-          this.approve += 1
-        } else if (this.userInfor.tasks[taskID].status == 'pending') {
-          this.pending += 1
-        } else {
-          console.log("counting error in ava-period")
+        if (!(taskID in this.taskList)) {
+          console.log("taskID not in taskList ava periods"+taskID)
+          if( this.userInfor.tasks[taskID].status == 'rejected') {
+            this.rejected += 1
+  
+          } else if (this.userInfor.tasks[taskID].status == 'approve') {
+            this.approve += 1
+          } else if (this.userInfor.tasks[taskID].status == 'pending') {
+            this.pending += 1
+          } else {
+            console.log("counting error in ava-period")
+          }
+          // var tempDate = new Date(this.item.tasks[task].toDate);
+          // if (this.today <= tempDate) {
+          //   this.taskList.push(this.item.tasks[task]);
+          // }
+          this.taskList.push({key:taskID, value:this.userInfor.tasks[taskID]});
         }
-        // var tempDate = new Date(this.item.tasks[task].toDate);
-        // if (this.today <= tempDate) {
-        //   this.taskList.push(this.item.tasks[task]);
-        // }
-        this.taskList.push({key:taskID, value:this.userInfor.tasks[taskID]});
+
 
         // console.log('ava-period task is ', this.item.tasks[task]);
         // console.log('ava-period taskid is ', task);

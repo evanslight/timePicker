@@ -4,11 +4,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      AddPeriod
+      Add New
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page2" class="no-scroll">
+<ion-content padding id="page2" >
 <!--   <ion-card id="addPeriod-card22">
     <ion-list>
       <ion-item color="none" id="addPeriod-list-item12">
@@ -72,21 +72,46 @@
   </ion-list> -->
 
   <ion-list>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
+    <ion-item tappable (click)="setDate('start')">
+      <ion-row>
+        <ion-col col-6 col-sm>
+          <h2>Start Date</h2>
+        </ion-col>
+        <ion-col col-6 col-sm>
+          <h2 text-right> {{ startday }}</h2>
+        </ion-col>
+      </ion-row>
+<!-- 
+      <ion-label >Start Date</ion-label>
+      <ion-label right > {{ startday }}</ion-label> -->
+<!--       <div [(ngModel)]="startday" >{{ startday }}</div> -->
 
-      <ion-datetime displayFormat="MMM DD YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="startday"></ion-datetime>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>End Date</ion-label>
-      <ion-datetime displayFormat="MMM DD YYYY" min="2010" max="2050-10-31" [(ngModel)]="endday"></ion-datetime>
+<!--       <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="startday"></ion-datetime> -->
     </ion-item>
 
     <ion-item>
       <ion-label>Start Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="event.timeStarts"></ion-datetime>
     </ion-item>
+  </ion-list>
+
+    <div class="spacer" style="height:10px;" id="login-spacer1"></div>
+
+  <ion-list>
+    <ion-item (click)="setDate('end')">
+<!--       <ion-label>End Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="endday"></ion-datetime> -->
+      <ion-row>
+        <ion-col col-6 col-sm>
+          <h2>End Date</h2>
+        </ion-col>
+        <ion-col col-6 col-sm>
+          <h2 text-right> {{ endday }}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+
 
     <ion-item>
       <ion-label>End Time</ion-label>
@@ -117,6 +142,9 @@
       Check
     </button> -->
   </ion-list>
-
+<!-- <ion-calendar [(ngModel)]="date"
+              [options]="optionsRange"
+              [format]="'YYYY-MM-DD'">
+</ion-calendar> -->
 
 </ion-content>

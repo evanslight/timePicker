@@ -12,7 +12,7 @@
       <ion-icon name="menu" text-left></ion-icon>
     </button>
     <ion-title>
-      AvaPeriod
+      Work Availability
     </ion-title>
   </ion-navbar>
 
@@ -22,7 +22,7 @@
 <ion-content padding id="page1" >
 
   <button id="avaPeriod-button5" ion-button color="balanced" block on-click="goToAddPeriod()">
-    Add New Period
+    Add New
   </button>
 <!-- <ion-item>
   <ion-icon name="logo-twitter" item-start></ion-icon>
@@ -46,13 +46,13 @@
     <ion-list >
 <!--       <ion-item *ngFor="let item of items"> -->
       <ion-list-header>
-        {{userInfor?.name}}'s Periods      
+        {{userInfor?.name}}'s Availability      
         <ion-badge color="secondary" item-end>{{ approve }}</ion-badge>
         <ion-badge item-end>{{ pending }}</ion-badge>
         <ion-badge color="danger" item-end>{{ rejected }}</ion-badge>
       </ion-list-header>
 
-      <ion-item-sliding *ngFor="let task of taskList ">
+      <ion-item-sliding *ngFor="let task of taskList?.reverse() ">
      
         <ion-item >
           <ion-row>

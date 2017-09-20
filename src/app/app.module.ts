@@ -16,6 +16,7 @@ import { StaffProvider } from '../providers/staff/staff';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Calendar } from '@ionic-native/calendar';
+import { CalendarModule } from "ion2-calendar";
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -46,7 +47,8 @@ export const firebaseConfig = {
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    CalendarModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

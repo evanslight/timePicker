@@ -13,7 +13,7 @@ import { StaffProvider } from '../../providers/staff/staff';
 export class ProfilePage {
 
   userInfor: any;
-  length: any;
+  // length: any;
   phone: string;
   email: string;
   userid: any;
@@ -28,7 +28,7 @@ export class ProfilePage {
       this.userInfor=profile.val()
       // console.log(this.userInfor);
 
-      this.length=Object.keys(this.userInfor.tasks).length;
+      // this.length=Object.keys(this.userInfor.tasks).length;
       // console.log(this.length);
       this.role=this.userInfor.role
 
@@ -63,6 +63,7 @@ export class ProfilePage {
     // console.log('this phone is '+this.phone);
     // // this.updateProfile(email,phone);
     this.sp.updateProfile(this.email,this.phone)
+    this.navCtrl.setRoot(AvaPeriodPage); 
 
   }
 

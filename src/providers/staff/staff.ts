@@ -149,7 +149,7 @@ export class StaffProvider {
     this.userInfo = this.db.object(path, {
       preserveSnapshot: true
     });
-    console.log("staff userInfo ->"+this.userInfo);
+    // console.log("staff userInfo ->"+this.userInfo);
     return this.userInfo;
   }
   // Send() {
@@ -423,7 +423,7 @@ export class StaffProvider {
     const toDatePath = `users/${this.currentUserId}/tasks/${taskID}/toDate`; 
     const startTimePath = `users/${this.currentUserId}/tasks/${taskID}/startTime`; 
     const endTimePath = `users/${this.currentUserId}/tasks/${taskID}/endTime`; 
-    console.log("debug edit -> ")
+    // console.log("debug edit -> ")
     console.log(fromDate)
     console.log(toDate)
 

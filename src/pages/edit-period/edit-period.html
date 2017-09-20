@@ -20,21 +20,41 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label>Start Date</ion-label>
+    <ion-item tappable (click)="setDate('start')">
+<!--       <ion-label>Start Date</ion-label>
 
-      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="fromDate"></ion-datetime>
-    </ion-item>
+      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="fromDate"></ion-datetime> -->
+      <ion-row>
+        <ion-col col-6 col-sm>
+          <h2>Start Date</h2>
+        </ion-col>
+        <ion-col col-6 col-sm>
+          <h2 text-right> {{ fromDate }}</h2>
+        </ion-col>
+      </ion-row>
 
-    <ion-item>
-      <ion-label>End Date</ion-label>
-      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="toDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Start Time</ion-label>
       <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="startTime"></ion-datetime>
     </ion-item>
+  </ion-list>
+     <div class="spacer" style="height:10px;" id="login-spacer1"></div>
+  <ion-list>
+    <ion-item tappable (click)="setDate('end')">
+<!--       <ion-label>End Date</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY" min="2010" max="2050-10-31" [(ngModel)]="toDate"></ion-datetime> -->
+      <ion-row>
+        <ion-col col-6 col-sm>
+          <h2>End Date</h2>
+        </ion-col>
+        <ion-col col-6 col-sm>
+          <h2 text-right> {{ toDate }}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
 
     <ion-item>
       <ion-label>End Time</ion-label>
